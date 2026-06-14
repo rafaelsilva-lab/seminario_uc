@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEC & CRVM — Guia do Aluno | Faculdade de Saúde Santa Casa BH</title>
+<style>
+  :root {
+    --purple-900: #1a0a2e;
+    --purple-800: #2d1554;
+    --purple-700: #4a2580;
+    --purple-600: #6b3aad;
+    --purple-500: #8b52d4;
+    --purple-400: #a97de0;
+    --purple-200: #d9c4f5;
+    --purple-100: #ede4fa;
+    --purple-50:  #f7f2fd;
+    --white: #ffffff;
+    --gray-100: #f4f4f6;
+    --gray-200: #e8e8ed;
+    --gray-500: #9090a0;
+    --gray-700: #4a4a5a;
+    --text-main: #1a0a2e;
+    --text-body: #3d2a5a;
+    --text-muted: #7a6a90;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--purple-50);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--purple-800);
+    color: var(--white);
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: var(--purple-600);
+    border-radius: 50%;
+    opacity: .25;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 140px; height: 140px;
+    background: var(--purple-500);
+    border-radius: 50%;
+    opacity: .18;
+  }
+  .header-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: var(--purple-600);
+    color: var(--purple-100);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: .5rem;
+    position: relative;
+  }
+  header h1 span { color: var(--purple-300, #c4a8f0); }
+  header p.subtitle {
+    font-size: .9rem;
+    color: var(--purple-200);
+    position: relative;
+  }
+  .purple-300 { color: #c4a8f0; }
+
+  /* NAV PILLS */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 1.25rem 1rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(74,37,128,.08);
+  }
+  nav a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--purple-700);
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--purple-200);
+    transition: background .15s, color .15s;
+  }
+  nav a:hover { background: var(--purple-700); color: var(--white); }
+
+  /* MAIN */
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+  /* SECTIONS */
+  section {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--purple-100);
+    padding: 1.75rem 1.5rem;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 80px;
+  }
+  .section-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--purple-500);
+    margin-bottom: .4rem;
+  }
+  section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--purple-800);
+    margin-bottom: .75rem;
+  }
+  section p {
+    font-size: .9rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: .6rem;
+  }
+  section h3 {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--purple-700);
+    margin: 1rem 0 .5rem;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--purple-100);
+    margin: 1.1rem 0;
+  }
+
+  /* CARDS GRID */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin: .75rem 0;
+  }
+  .mini-card {
+    background: var(--purple-50);
+    border: 1px solid var(--purple-100);
+    border-radius: var(--radius-md);
+    padding: .75rem .9rem;
+  }
+  .mini-card .lbl {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--purple-500);
+    margin-bottom: 4px;
+  }
+  .mini-card .val {
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--purple-900);
+    line-height: 1.35;
+  }
+
+  /* FLOW */
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: .75rem 0;
+  }
+  .flow-box {
+    background: var(--purple-100);
+    color: var(--purple-800);
+    font-size: .8rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--purple-200);
+  }
+  .flow-box.highlight {
+    background: var(--purple-700);
+    color: var(--white);
+    border-color: var(--purple-700);
+  }
+  .flow-box.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-color: #a5d6a7;
+  }
+  .flow-arrow { color: var(--purple-400); font-size: 1rem; font-weight: 700; }
+
+  /* STEPS */
+  .step { display: flex; gap: 10px; margin: .55rem 0; align-items: flex-start; }
+  .step-num {
+    min-width: 22px; height: 22px;
+    background: var(--purple-700);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-dot {
+    min-width: 8px; height: 8px;
+    background: var(--purple-400);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .step-txt { font-size: .88rem; color: var(--text-body); line-height: 1.55; }
+  .step-txt strong { color: var(--purple-800); font-weight: 600; }
+
+  /* ALERTS */
+  .alert {
+    border-radius: var(--radius-md);
+    padding: .85rem 1rem;
+    font-size: .85rem;
+    line-height: 1.6;
+    margin: .75rem 0;
+  }
+  .alert strong { font-weight: 600; }
+  .alert-purple { background: var(--purple-100); color: var(--purple-800); border-left: 3px solid var(--purple-500); }
+  .alert-red    { background: #fdecea; color: #b71c1c; border-left: 3px solid #ef9a9a; }
+  .alert-amber  { background: #fff8e1; color: #7a5500; border-left: 3px solid #ffd54f; }
+  .alert-green  { background: #e8f5e9; color: #1b5e20; border-left: 3px solid #81c784; }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+  .badge-red    { background: #fdecea; color: #b71c1c; }
+  .badge-green  { background: #e8f5e9; color: #2e7d32; }
+  .badge-purple { background: var(--purple-100); color: var(--purple-700); }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* CONCEPT BOX */
+  .concept-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: .75rem 0; }
+  @media(max-width: 480px) { .concept-row { grid-template-columns: 1fr; } }
+  .concept-card {
+    border: 1px solid var(--purple-200);
+    border-radius: var(--radius-md);
+    padding: .85rem;
+    background: var(--white);
+  }
+  .concept-card .c-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--purple-500);
+    margin-bottom: .3rem;
+  }
+  .concept-card .c-title {
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--purple-800);
+    margin-bottom: .3rem;
+  }
+  .concept-card .c-body {
+    font-size: .8rem;
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: .78rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--purple-100);
+  }
+  footer strong { color: var(--purple-700); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">Faculdade de Saúde Santa Casa BH · Turma 8N</div>
+  <h1>CEC & CRVM<br><span class="purple-300">Do bisturi ao pós-op</span></h1>
+  <p class="subtitle">Guia completo para o seminário — abra no celular e acompanhe</p>
+</header>
+
+<nav>
+  <a href="#cec">O que é CEC</a>
+  <a href="#crvm">CRVM</a>
+  <a href="#sris">SRIS</a>
+  <a href="#choque">Choque</a>
+  <a href="#enfermagem">Enfermagem</a>
+</nav>
+
+<main>
+
+  <!-- PARTE 1 -->
+  <section id="cec">
+    <p class="section-tag">Parte 1 de 5</p>
+    <h2>O que é a CEC?</h2>
+    <p>A <strong>Circulação Extracorpórea (CEC)</strong> é uma máquina que substitui temporariamente o coração e os pulmões durante a cirurgia. Enquanto o cirurgião opera, ela bombeia e oxigena o sangue.</p>
+
+    <div class="card-grid">
+      <div class="mini-card"><p class="lbl">Também chamada</p><p class="val">Bomba cardiopulmonar</p></div>
+      <div class="mini-card"><p class="lbl">Quem opera</p><p class="val">Perfusionista</p></div>
+      <div class="mini-card"><p class="lbl">Duração típica</p><p class="val">1 a 4 horas</p></div>
+    </div>
+
+    <hr class="divider">
+    <h3>Como funciona — passo a passo</h3>
+    <div class="flow">
+      <div class="flow-box highlight">Coração parado<br><small style="font-weight:400">(cardioplegia)</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Sangue desviado<br>para a máquina</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Oxigenador<br>artificial</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Bomba devolve<br>ao corpo</div>
+    </div>
+
+    <div class="alert alert-purple">
+      <strong>Cardioplegia:</strong> solução gelada que para o coração e protege o músculo cardíaco durante a cirurgia.
+    </div>
+  </section>
+
+  <!-- PARTE 2 -->
+  <section id="crvm">
+    <p class="section-tag">Parte 2 de 5</p>
+    <h2>CRVM — a "ponte de safena"</h2>
+    <p>A <strong>Cirurgia de Revascularização do Miocárdio (CRVM)</strong> cria novos caminhos para o sangue chegar ao coração — desviando artérias coronárias entupidas. É impossível costurar vasos finos num coração que bate, então a CEC é indispensável.</p>
+
+    <hr class="divider">
+    <div class="two-col">
+      <div>
+        <h3>Enxertos usados</h3>
+        <div class="step"><div class="step-dot"></div><p class="step-txt"><strong>Veia safena</strong> (perna) — mais comum</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt"><strong>Artéria mamária interna</strong> — mais durável</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt"><strong>Artéria radial</strong> (punho) — complementar</p></div>
+      </div>
+      <div>
+        <h3>Por que precisa da CEC</h3>
+        <div class="step"><div class="step-num">1</div><p class="step-txt">Coração precisa estar parado e sem sangue</p></div>
+        <div class="step"><div class="step-num">2</div><p class="step-txt">CEC mantém o paciente vivo nesse período</p></div>
+        <div class="step"><div class="step-num">3</div><p class="step-txt">Sem ela, não há tempo seguro para operar</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTE 3 -->
+  <section id="sris">
+    <p class="section-tag">Parte 3 de 5</p>
+    <h2>SRIS-CEC — o corpo em alarme</h2>
+    <p>Quando o sangue passa pelo circuito plástico da máquina, o corpo interpreta como agressão e dispara uma inflamação generalizada — a <strong>Síndrome da Resposta Inflamatória Sistêmica (SRIS)</strong>.</p>
+
+    <div class="alert alert-amber">
+      <strong>Analogia:</strong> é como o alarme de incêndio disparando sem foco — causando dano em tudo ao redor, não só no coração.
+    </div>
+
+    <hr class="divider">
+    <h3>Consequências no pós-op</h3>
+    <div class="card-grid">
+      <div class="mini-card"><p class="lbl">Vasos</p><p class="val">Vasodilatação → pressão cai</p></div>
+      <div class="mini-card"><p class="lbl">Tecidos</p><p class="val">Edema generalizado</p></div>
+      <div class="mini-card"><p class="lbl">Pulmão</p><p class="val">Lesão aguda (SARA)</p></div>
+      <div class="mini-card"><p class="lbl">Rim</p><p class="val">Lesão renal aguda</p></div>
+      <div class="mini-card"><p class="lbl">Coração</p><p class="val">Disfunção do VE</p></div>
+      <div class="mini-card"><p class="lbl">Coagulação</p><p class="val">Sangramento e trombose</p></div>
+    </div>
+  </section>
+
+  <!-- PARTE 4 -->
+  <section id="choque">
+    <p class="section-tag">Parte 4 de 5</p>
+    <h2>Disfunção do VE e Choque Cardiogênico</h2>
+
+    <h3>Por que o VE fraqueja após a CEC?</h3>
+    <div class="step"><div class="step-num">1</div><p class="step-txt">Ficou parado por horas — músculo fatigado</p></div>
+    <div class="step"><div class="step-num">2</div><p class="step-txt">SRIS libera substâncias que <strong>deprimem o miocárdio</strong></p></div>
+    <div class="step"><div class="step-num">3</div><p class="step-txt">Reperfusão gera radicais livres que lesam as células</p></div>
+
+    <hr class="divider">
+    <h3>Entendendo o VE — 3 conceitos-chave</h3>
+    <div class="concept-row">
+      <div class="concept-card">
+        <p class="c-label">FEVE</p>
+        <p class="c-title">Fração de Ejeção</p>
+        <p class="c-body">% do sangue ejetado a cada batimento. Normal ≥ 55%. Mede o quanto o VE "manda pra fora".</p>
+      </div>
+      <div class="concept-card">
+        <p class="c-label">Pós-carga</p>
+        <p class="c-title">Resistência à ejeção</p>
+        <p class="c-body">É a pressão que o VE precisa vencer para empurrar o sangue — principalmente a pressão aórtica.</p>
+      </div>
+      <div class="concept-card">
+        <p class="c-label">Contratilidade</p>
+        <p class="c-title">Força do músculo</p>
+        <p class="c-body">Capacidade intrínseca do miocárdio de contrair. A <strong>dobutamina</strong> age nos receptores beta-1 e aumenta essa força.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <h3>A cadeia do choque cardiogênico</h3>
+    <div class="flow">
+      <div class="flow-box highlight">VE fraco</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Débito cardíaco ↓</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Órgãos sem sangue</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Células sem O₂</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box highlight">Lactato ↑</div>
+    </div>
+
+    <div class="alert alert-amber">
+      <strong>Choque críptico:</strong> paciente com PA ainda normal, mas lactato já ≥ 2 mmol/L. O lactato pode ser o único sinal precoce — monitore sempre!
+    </div>
+
+    <hr class="divider">
+    <h3>Sinais clínicos para reconhecer</h3>
+    <div class="card-grid">
+      <div class="mini-card"><p class="lbl">PA</p><p class="val">Hipotensão <span class="badge badge-red">alerta</span></p></div>
+      <div class="mini-card"><p class="lbl">Diurese</p><p class="val">&lt; 0,5 ml/kg/h <span class="badge badge-red">alerta</span></p></div>
+      <div class="mini-card"><p class="lbl">Extremidades</p><p class="val">Frias e moteadas</p></div>
+      <div class="mini-card"><p class="lbl">Consciência</p><p class="val">Agitação ou sonolência</p></div>
+      <div class="mini-card"><p class="lbl">Lactato</p><p class="val">≥ 2 mmol/L <span class="badge badge-red">alerta</span></p></div>
+      <div class="mini-card"><p class="lbl">ECG</p><p class="val">Arritmias novas</p></div>
+    </div>
+
+    <hr class="divider">
+    <h3>Como diagnosticar</h3>
+    <div class="step">
+      <div class="step-num">1°</div>
+      <p class="step-txt"><strong>Ecocardiograma à beira leito (POCUS)</strong> — avalia FEVE e contratilidade em tempo real, sem riscos. <span class="badge badge-green">Rotina pós-CRVM</span></p>
+    </div>
+    <div class="step">
+      <div class="step-num">2°</div>
+      <p class="step-txt"><strong>Cateter de Swan-Ganz</strong> — padrão ouro clássico, mede débito cardíaco direto. Caiu em desuso por complicações. <span class="badge badge-purple">Casos selecionados</span></p>
+    </div>
+
+    <div class="alert alert-purple">
+      <strong>Tratamento:</strong> <strong>dobutamina</strong> é o inotrópico de escolha — ativa receptores beta-1 e aumenta diretamente a força de contração do VE.
+    </div>
+  </section>
+
+  <!-- PARTE 5 -->
+  <section id="enfermagem">
+    <p class="section-tag">Parte 5 de 5</p>
+    <h2>Papel da enfermagem no pós-op</h2>
+
+    <div class="two-col">
+      <div>
+        <h3>Monitorizar</h3>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">PA invasiva, FC, SpO₂</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">Diurese horária rigorosa</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">Temperatura (risco de hipotermia)</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">Drenos torácicos — volume e aspecto</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt"><strong>Lactato</strong> e glicemia</p></div>
+      </div>
+      <div>
+        <h3>Intervir</h3>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">Vasoativos conforme prescrição (noradrenalina, dobutamina)</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">Balanço hídrico rigoroso</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">Cuidado com ferida esternal e safenectomia</p></div>
+        <div class="step"><div class="step-dot"></div><p class="step-txt">Comunicar sinais de choque imediatamente</p></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <h3>O fio que liga tudo</h3>
+    <div class="flow">
+      <div class="flow-box highlight">CEC</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">SRIS</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Disfunção VE</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Choque</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box success">Enfermagem atua aqui ✓</div>
+    </div>
+
+    <div class="alert alert-green">
+      <strong>Mensagem final:</strong> entender essa cadeia explica por que o pós-op de CRVM é tão complexo — e por que a monitorização atenta, incluindo o lactato, faz diferença real no desfecho do paciente.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Faculdade de Saúde Santa Casa BH</strong> · Turma 8N · Técnico em Enfermagem<br>
+  Seminário — CEC, CRVM e Complicações Pós-Operatórias
+</footer>
+
+</body>
+</html>
